@@ -1,0 +1,8 @@
+name: EffectRanks
+version: '${version}'
+main: me.bryang.effectranks.EffectRanks
+api-version: 1.13
+author: BryanG
+
+softdepend:
+  - Vault

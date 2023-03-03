@@ -1,0 +1,47 @@
+#
+# Messages.yml
+
+# Plugin messages
+plugin:
+
+  # Help format.
+  help:
+    - "&E[ER] &fHelp format."
+    - "&8- &e/er help &8: &fHelp subcommand."
+    - "&8- &e/er enable &8: &fEnable effects."
+    - "&8- &e/er convert &8: &fConvert effect to potions."
+    - "&8- &e/er info &8: &fInfo of your potion."
+
+  # When you toggle your potions.
+  enabled: "&e[ER] &fEffects enabled."
+
+  # Convert your effects.
+  converted: "&e[ER] &fEffects converted in a potion."
+
+  # Info of effects
+  # %vl% = value line.
+  info:
+    - "&e[ER] &fInfo of your potion."
+    - "%vl%&8- &f%effect% &8[&f%level%&8] &8: &f%time%"
+
+# Admin help
+admin:
+
+  help:
+    - "&c[ER] &fAdmin help."
+    - "&8- &e/er reload &8: &fReload plugin."
+
+  # Reload plugin.
+  reload: "&fFiles reloaded."
+
+# Error messages
+error:
+
+  # Put a command in console.
+  console: "&cErr &8| &fYou can't do this in console."
+
+  # Unknown effect for the rank.
+  empty-effects: "&cErr &8| &fTheres no effect for you rank."
+
+  # Cooldown
+  wait-cooldown: "&cErr &8| &fYou need to wait &c%time%"

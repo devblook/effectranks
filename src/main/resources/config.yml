@@ -1,0 +1,63 @@
+#
+# Config.yml
+
+settings:
+
+  # Key interact [NONE / SHIFT / LEFT-CLICK / RIGHT-CLICK:
+  key: SHIFT
+
+  # Toggle effect by permission or group.
+  toggle-type: permission
+
+  # Potion format (%vl% = value line).
+  potion:
+    name: "&a%rank_name% &fpotion."
+
+    format:
+      - ""
+      - "&eEffects:"
+      - "%vl%&8- &f%name% &8- &f%duration% &8- &f%level%"
+      - ""
+      - "&aClick to use!"
+
+  time:
+    years: years
+    year: year
+    months: months
+    month: month
+    weeks: weeks
+    week: week
+    days: days
+    day: day
+    hours: hours
+    hour: hour
+    minutes: minutes
+    minute: minute
+    seconds: seconds
+    second: second
+
+
+# Effect groups.
+default:
+  cooldown: 1min 30s
+
+  # Display name [Optional]
+  display-name: default
+  effects:
+    - "speed,30,1"
+
+groups:
+  A:
+    cooldown: 30s
+
+    # Display name [Optional]
+    display-name: A
+    effects:
+      - "speed, 120, 4"
+  B:
+    cooldown: 30s
+
+    # Display name [Optional]
+    display-name: A
+    effects:
+      - "speed, 120, 4"
