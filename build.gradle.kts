@@ -12,7 +12,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly ("org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT")
+    compileOnly ("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
+
     implementation ("team.unnamed:inject:1.0.1")
     implementation ("me.fixeddev:commandflow-universal:0.5.3")
     implementation ("me.fixeddev:commandflow-bukkit:0.5.2")
@@ -25,7 +26,6 @@ tasks {
 
     shadowJar {
         archiveFileName.set("EffectRanks.jar")
-        relocate("team.unnamed.inject", "${project.group}.effectranks.libs.inject")
         relocate("team.unnamed.inject", "${project.group}.effectranks.libs.inject")
 
     }
