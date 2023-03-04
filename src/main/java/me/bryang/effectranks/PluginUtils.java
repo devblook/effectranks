@@ -1,8 +1,11 @@
 package me.bryang.effectranks;
 
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.util.List;
 
 public class PluginUtils {
 
@@ -164,5 +167,20 @@ public class PluginUtils {
     }
 
 
+    public static void addPotionEffects(Player sender, List<String> effects){
+
+        effects.forEach(effect -> {
+
+            PotionEffect potionEffect = stringToEffect(effect);
+
+            if (potionEffect == null){
+                sender.sendMessage("Error: Please check config");
+                return;
+            }
+
+            sender.addPotionEffect(potionEffect);
+
+        });
+    }
 
 }
