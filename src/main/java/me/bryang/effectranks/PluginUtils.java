@@ -67,50 +67,39 @@ public class PluginUtils {
 
             int time = Integer.parseInt(timeFormatPath.substring(0, timeFormatPath.length() - 1));
 
-
             stringBuilder.append(" ");
 
             if (timeFormatPath.endsWith("y")){
 
-                stringBuilder
-                        .append(section.getString((time == 1) ? "year" : "years"));
+                stringBuilder.append(section.getString((time == 1) ? "year" : "years"));
             }
 
             if (timeFormatPath.endsWith("m")) {
 
-                stringBuilder
-                        .append(section.getString((time == 1) ? "month" : "months"));
+                stringBuilder.append(section.getString((time == 1) ? "month" : "months"));
             }
 
             if (timeFormatPath.endsWith("w")){
 
-
-
-                stringBuilder
-                        .append(section.getString((time == 1) ? "week" : "weeks"));
+                stringBuilder.append(section.getString((time == 1) ? "week" : "weeks"));
             }
             if (timeFormatPath.endsWith("d")){
 
-
-                stringBuilder
-                        .append(section.getString((time == 1) ? "day" : "days"));
+                stringBuilder.append(section.getString((time == 1) ? "day" : "days"));
             }
 
             if (timeFormatPath.endsWith("h")){
 
-                stringBuilder
-                        .append(section.getString((time == 1) ? "hour" : "hours"));
+                stringBuilder.append(section.getString((time == 1) ? "hour" : "hours"));
             }
 
             if (timeFormatPath.endsWith("min")){
 
-                stringBuilder
-                        .append(section.getString((time == 1) ? "minute" : "minutes"));
+                stringBuilder.append(section.getString((time == 1) ? "minute" : "minutes"));
             }
             if (timeFormatPath.endsWith("s")){
 
-                stringBuilder
-                        .append(section.getString((time == 1) ? "second" : "seconds"));
+                stringBuilder.append(section.getString((time == 1) ? "second" : "seconds"));
             }
 
         }
