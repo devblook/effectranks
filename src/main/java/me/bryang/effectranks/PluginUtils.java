@@ -1,5 +1,6 @@
 package me.bryang.effectranks;
 
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -10,9 +11,7 @@ import java.util.List;
 public class PluginUtils {
 
 
-    public static int convertTimeToInt(String timePath){
-
-        String[] times = timePath.split(" ");
+    public static int convertTimeToInt(String timePath) {
 
         int newTime = 0;
 
@@ -23,88 +22,135 @@ public class PluginUtils {
         int months = week * 4 + (day * 2);
         int year = months * 12;
 
-        for (String timeFormatPath : times){
+        int yearIndex = timePath.indexOf("y");
 
-            int time = Integer.parseInt(timeFormatPath.substring(0, timeFormatPath.length() - 1));
-
-            if (timeFormatPath.endsWith("y")){
-                newTime = newTime + (time * year);
-            }
-
-            if (timeFormatPath.endsWith("m")){
-                newTime = newTime + (time * months);
-            }
-
-            if (timeFormatPath.endsWith("w")){
-                newTime = newTime + (time * week);
-            }
-            if (timeFormatPath.endsWith("d")){
-                newTime = newTime + (time * day);
-            }
-
-            if (timeFormatPath.endsWith("h")){
-                newTime = newTime + (time * hour);
-            }
-
-            if (timeFormatPath.endsWith("min")){
-                newTime = newTime + (time * minutes);
-            }
-            if (timeFormatPath.endsWith("s")){
-                newTime += time;
-            }
-
+        if (yearIndex != 1) {
+            newTime += timePath.indexOf(" ", yearIndex) * year;
         }
+
+        int monthIndex = timePath.indexOf("m");
+
+        if (monthIndex != 1) {
+            newTime += timePath.indexOf(" ", monthIndex) * months;
+        }
+
+        int weekIndex = timePath.indexOf("w");
+
+        if (weekIndex != 1) {
+            newTime += timePath.indexOf(" ", weekIndex) * week;
+        }
+
+        int dayIndex = timePath.indexOf("d");
+
+        if (dayIndex != 1) {
+            newTime += timePath.indexOf(" ", dayIndex) * day;
+        }
+        int hourIndex = timePath.indexOf("h");
+
+        if (hourIndex != 1) {
+            newTime += timePath.indexOf(" ", hourIndex) * hour;
+        }
+
+        int minIndex = timePath.indexOf("min");
+
+        if (minIndex != 1) {
+            newTime += timePath.indexOf(" ", minIndex) * minutes;
+        }
+
+        int secondIndex = timePath.indexOf("s");
+
+        if (secondIndex != 1) {
+            newTime += timePath.indexOf(" ", secondIndex);
+        }
+
 
         return newTime;
     }
 
     public static String convertTimeToString(String timePath, ConfigurationSection section){
 
-        String[] times = timePath.split(" ");
-        StringBuilder stringBuilder = new StringBuilder();
+         StringBuilder stringBuilder = new StringBuilder();
+         stringBuilder.insert(0, " ");
 
-        for (String timeFormatPath : times){
+        int yearIndex = timePath.indexOf("y");
 
-            int time = Integer.parseInt(timeFormatPath.substring(0, timeFormatPath.length() - 1));
+        if (yearIndex != 1) {
 
-            stringBuilder.append(" ");
+            int yearTime = convertNumber(timePath, yearIndex);
 
-            if (timeFormatPath.endsWith("y")){
+             stringBuilder
+                     .append(section.getString((yearTime == 1) ? "year" : "years"))
+                     .append(" ");
+         }
 
-                stringBuilder.append(section.getString((time == 1) ? "year" : "years"));
-            }
+        int monthIndex = timePath.indexOf("m");
 
-            if (timeFormatPath.endsWith("m")) {
+        if (monthIndex != 1) {
 
-                stringBuilder.append(section.getString((time == 1) ? "month" : "months"));
-            }
+            int monthTime = convertNumber(timePath, monthIndex);
 
-            if (timeFormatPath.endsWith("w")){
-
-                stringBuilder.append(section.getString((time == 1) ? "week" : "weeks"));
-            }
-            if (timeFormatPath.endsWith("d")){
-
-                stringBuilder.append(section.getString((time == 1) ? "day" : "days"));
-            }
-
-            if (timeFormatPath.endsWith("h")){
-
-                stringBuilder.append(section.getString((time == 1) ? "hour" : "hours"));
-            }
-
-            if (timeFormatPath.endsWith("min")){
-
-                stringBuilder.append(section.getString((time == 1) ? "minute" : "minutes"));
-            }
-            if (timeFormatPath.endsWith("s")){
-
-                stringBuilder.append(section.getString((time == 1) ? "second" : "seconds"));
-            }
-
+            stringBuilder
+                    .append(section.getString((monthTime == 1) ? "month" : "months"))
+                    .append(" ");
         }
 
-        return stringBuilder.substring(1);
+        int weekIndex = timePath.indexOf("y");
+
+        if (weekIndex != 1) {
+
+            int weekTime = convertNumber(timePath, weekIndex);
+
+            stringBuilder
+                    .append(section.getString((weekTime == 1) ? "week" : "weeks"))
+                    .append(" ");
+        }
+
+        int daysIndex = timePath.indexOf("d");
+
+        if (daysIndex != 1) {
+
+            int dayTime = convertNumber(timePath, daysIndex);
+
+            stringBuilder
+                    .append(section.getString((dayTime == 1) ? "day" : "days"))
+                    .append(" ");
+        }
+
+        int hoursIndex = timePath.indexOf("h");
+
+        if (hoursIndex != 1) {
+
+            int hoursTime = convertNumber(timePath, hoursIndex);
+
+            stringBuilder
+                    .append(section.getString((hoursTime == 1) ? "hour" : "hours"))
+                    .append(" ");
+        }
+
+        int minuteIndex = timePath.indexOf("min");
+
+        if (minuteIndex != 1) {
+
+            int minuteTime = convertNumber(timePath, minuteIndex);
+
+            stringBuilder
+                    .append(section.getString((minuteTime == 1) ? "minute" : "minutes"))
+                    .append(" ");
+        }
+
+        int secondsIndex = timePath.indexOf("s");
+
+        if (secondsIndex != 1) {
+
+            int secondTime = convertNumber(timePath, secondsIndex);
+
+            stringBuilder
+                    .append(section.getString((secondTime == 1) ? "second" : "seconds"))
+                    .append(" ");
+        }
+
+
+        return stringBuilder.toString();
     }
 
     public static PotionEffect stringToEffect(String path){
@@ -139,5 +185,13 @@ public class PluginUtils {
 
         });
     }
+
+    private static int convertNumber(String message, int lastIndex) {
+
+        int firstIndexOf = message.lastIndexOf(" ", lastIndex);
+        return Integer.parseInt(message.substring(lastIndex, firstIndexOf));
+
+    }
+
 
 }
