@@ -58,6 +58,7 @@ public class EffectRankCommand implements CommandClass {
         String playerRank = groupManager.returnGroup(sender);
         List<String> effects = configFile.getStringList(playerRank + ".effects");
 
+        PluginUtils.addPotionEffects(sender, effects);
 
         long currentTime = System.currentTimeMillis() / 1000;
         String senderCooldown = configFile.getString(playerRank + ".cooldown");
