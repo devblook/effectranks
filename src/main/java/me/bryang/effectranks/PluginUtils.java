@@ -10,6 +10,7 @@ import java.util.List;
 
 public class PluginUtils {
 
+// Time format: 1y 2m 3w 4d 5h 6min 7s
 
     public static int convertTimeToInt(String timePath) {
 
