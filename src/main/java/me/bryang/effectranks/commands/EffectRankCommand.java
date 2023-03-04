@@ -74,6 +74,7 @@ public class EffectRankCommand implements CommandClass {
 
         playersFile.set(sender.getUniqueId().toString(), currentTime - time);
         playersFile.save();
+        sender.sendMessage(messagesFile.getString("plugin.enabled"));
     }
 
     @Command(
