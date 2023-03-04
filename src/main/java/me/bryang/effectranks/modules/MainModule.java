@@ -2,6 +2,8 @@ package me.bryang.effectranks.modules;
 
 import me.bryang.effectranks.EffectRanks;
 import me.bryang.effectranks.commands.EffectRankCommand;
+import me.bryang.effectranks.listeners.PlayerSelectKeyListener;
+import me.bryang.effectranks.manager.GroupManager;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.key.TypeReference;
 
@@ -27,7 +29,15 @@ public class MainModule extends AbstractModule {
 
         install(new FileModule());
 
+        bind(GroupManager.class)
+                .toInstance(new GroupManager());
+
         bind(EffectRankCommand.class)
                 .toInstance(new EffectRankCommand());
+
+        bind(PlayerSelectKeyListener.class)
+                .toInstance(new PlayerSelectKeyListener());
+
+        install(new ServicesModule());
     }
 }
