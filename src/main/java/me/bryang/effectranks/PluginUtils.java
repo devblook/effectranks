@@ -72,77 +72,45 @@ public class PluginUtils {
 
             if (timeFormatPath.endsWith("y")){
 
-                String years = "years";
-
-                if (time == 1){
-                    years = years.substring(0, years.length() - 1);
-                }
-
-                stringBuilder.append(section.getString(years));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "year" : "years"));
             }
 
-            if (timeFormatPath.endsWith("m")){
+            if (timeFormatPath.endsWith("m")) {
 
-                String month = "month";
-
-                if (time == 1){
-                    month = month.substring(0, month.length() - 1);
-                }
-
-                stringBuilder.append(section.getString(month));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "month" : "months"));
             }
 
             if (timeFormatPath.endsWith("w")){
 
-                String week = "week";
 
-                if (time == 1){
-                    week = week.substring(0, week.length() - 1);
-                }
 
-                stringBuilder.append(section.getString(week));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "week" : "weeks"));
             }
             if (timeFormatPath.endsWith("d")){
 
-                String days = "days";
 
-                if (time == 1){
-                    days = days.substring(0, days.length() - 1);
-                }
-
-                stringBuilder.append(section.getString(days));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "day" : "days"));
             }
 
             if (timeFormatPath.endsWith("h")){
 
-                String hours = "hours";
-
-                if (time == 1){
-                    hours = hours.substring(0, hours.length() - 1);
-                }
-
-                stringBuilder.append(section.getString(hours));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "hour" : "hours"));
             }
 
             if (timeFormatPath.endsWith("min")){
 
-                String min = "minutes";
-
-                if (time == 1){
-                    min = min.substring(0, min.length() - 1);
-                }
-
-                stringBuilder.append(section.getString(min));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "minute" : "minutes"));
             }
             if (timeFormatPath.endsWith("s")){
 
-                String seconds = "seconds";
-
-                if (time == 1){
-                    seconds = seconds.substring(0, seconds.length() - 1);
-                }
-
-                stringBuilder.append(section.getString(seconds));
+                stringBuilder
+                        .append(section.getString((time == 1) ? "second" : "seconds"));
             }
 
         }
