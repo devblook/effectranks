@@ -1,4 +1,4 @@
-package me.bryang.effectranks.modules;
+package me.bryang.effectranks.services;
 
 import me.bryang.effectranks.manager.GroupManager;
 import me.bryang.effectranks.services.Service;

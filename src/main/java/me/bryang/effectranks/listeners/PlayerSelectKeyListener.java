@@ -3,6 +3,8 @@ package me.bryang.effectranks.listeners;
 import me.bryang.effectranks.FileCreator;
 import me.bryang.effectranks.PluginUtils;
 import me.bryang.effectranks.manager.GroupManager;
+import me.bryang.effectranks.manager.SenderManager;
+import me.bryang.effectranks.services.ManagerService;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +21,7 @@ public class PlayerSelectKeyListener implements Listener{
 
     private FileCreator configFile;
 
-    private GroupManager groupManager;
+    private SenderManager senderManager;
 
 
 
@@ -35,12 +37,7 @@ public class PlayerSelectKeyListener implements Listener{
             return;
         }
 
-        Player sender = event.getPlayer();
-
-        String playerRank = groupManager.returnGroup(sender);
-        List<String> effects = configFile.getStringList(playerRank + ".effects");
-
-        PluginUtils.addPotionEffects(sender, effects);
+        senderManager.enablePlayerEffects(event.getPlayer());
 
     }
 
@@ -56,12 +53,7 @@ public class PlayerSelectKeyListener implements Listener{
             return;
         }
 
-        Player sender = event.getPlayer();
-
-        String playerRank = groupManager.returnGroup(sender);
-        List<String> effects = configFile.getStringList(playerRank + ".effects");
-
-        PluginUtils.addPotionEffects(sender, effects);
+        senderManager.enablePlayerEffects(event.getPlayer());
 
     }
 }

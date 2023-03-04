@@ -3,6 +3,7 @@ package me.bryang.effectranks.commands;
 import me.bryang.effectranks.FileCreator;
 import me.bryang.effectranks.PluginUtils;
 import me.bryang.effectranks.manager.GroupManager;
+import me.bryang.effectranks.manager.SenderManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
@@ -36,6 +37,7 @@ public class EffectRankCommand implements CommandClass {
     private FileCreator playersFile;
     
     private GroupManager groupManager;
+    private SenderManager senderManager;
 
     private Map<UUID, Integer> playerCooldown;
 
@@ -48,33 +50,14 @@ public class EffectRankCommand implements CommandClass {
 
         messagesFile.getStringList("plugin.help")
                 .forEach(sender::sendMessage);
-    
+
     }
 
     @Command(
             names = "enable")
     public void onOnSubCommand(@Sender Player sender){
 
-        String playerRank = groupManager.returnGroup(sender);
-        List<String> effects = configFile.getStringList(playerRank + ".effects");
-
-        PluginUtils.addPotionEffects(sender, effects);
-
-        long currentTime = System.currentTimeMillis() / 1000;
-        String senderCooldown = configFile.getString(playerRank + ".cooldown");
-
-        if (senderCooldown == null){
-            sender.sendMessage("Error: Please check config.");
-            return;
-        }
-
-        int time = PluginUtils.convertTimeToInt(senderCooldown);
-
-        playerCooldown.put(sender.getUniqueId(), Math.round(currentTime - time));
-
-        playersFile.set(sender.getUniqueId().toString(), currentTime - time);
-        playersFile.save();
-        sender.sendMessage(messagesFile.getString("plugin.enabled"));
+        senderManager.enablePlayerEffects(sender);
     }
 
     @Command(
@@ -132,6 +115,22 @@ public class EffectRankCommand implements CommandClass {
         });
 
         itemStack.setItemMeta(potionMeta);
+
+        long currentTime = System.currentTimeMillis() / 1000;
+        String senderCooldown = configFile.getString(playerRank + ".cooldown");
+
+        if (senderCooldown == null){
+            sender.sendMessage("Error: Please check config.");
+            return;
+        }
+
+        int time = PluginUtils.convertTimeToInt(senderCooldown);
+
+        playerCooldown.put(sender.getUniqueId(), Math.round(currentTime - time));
+
+        playersFile.set(sender.getUniqueId().toString(), currentTime - time);
+        playersFile.save();
+        sender.sendMessage(messagesFile.getString("plugin.enabled"));
     }
 
     @Command(

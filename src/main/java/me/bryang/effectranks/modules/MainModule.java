@@ -4,6 +4,7 @@ import me.bryang.effectranks.EffectRanks;
 import me.bryang.effectranks.commands.EffectRankCommand;
 import me.bryang.effectranks.listeners.PlayerSelectKeyListener;
 import me.bryang.effectranks.manager.GroupManager;
+import me.bryang.effectranks.services.ManagerService;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.key.TypeReference;
 
@@ -28,6 +29,9 @@ public class MainModule extends AbstractModule {
                 .toInstance(new HashMap<>());
 
         install(new FileModule());
+
+        bind(ManagerService.class)
+                .toInstance(new ManagerService());
 
         bind(GroupManager.class)
                 .toInstance(new GroupManager());

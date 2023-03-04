@@ -170,23 +170,6 @@ public class PluginUtils {
         return new PotionEffect(potionEffectType, duration, level);
     }
 
-
-    public static void addPotionEffects(Player sender, List<String> effects){
-
-        effects.forEach(effect -> {
-
-            PotionEffect potionEffect = stringToEffect(effect);
-
-            if (potionEffect == null){
-                sender.sendMessage("Error: Please check config");
-                return;
-            }
-
-            sender.addPotionEffect(potionEffect);
-
-        });
-    }
-
     private static int convertNumber(String message, int lastIndex) {
 
         int firstIndexOf = message.lastIndexOf(" ", lastIndex);
