@@ -43,28 +43,21 @@ public class EffectRankCommand implements CommandClass {
     @Command(
             names = {"", "help"},
             desc = "Help subcommand")
+
     public void onMainSubCommand(@Sender Player sender){
-        messagesFile.getStringList("plugin.help").forEach(sender::sendMessage);
+
+        messagesFile.getStringList("plugin.help")
+                .forEach(sender::sendMessage);
+    
     }
 
-    @Command(names = "enable")
+    @Command(
+            names = "enable")
     public void onOnSubCommand(@Sender Player sender){
 
         String playerRank = groupManager.returnGroup(sender);
         List<String> effects = configFile.getStringList(playerRank + ".effects");
 
-        effects.forEach(effect -> {
-
-            PotionEffect potionEffect = PluginUtils.stringToEffect(effect);
-
-            if (potionEffect == null){
-                sender.sendMessage("Error: Please check config");
-                return;
-            }
-
-            sender.addPotionEffect(potionEffect);
-
-        });
 
         long currentTime = System.currentTimeMillis() / 1000;
         String senderCooldown = configFile.getString(playerRank + ".cooldown");
@@ -82,7 +75,8 @@ public class EffectRankCommand implements CommandClass {
         playersFile.save();
     }
 
-    @Command(names = "convert")
+    @Command(
+            names = "convert")
     public void onConvertSubCommand(@Sender Player sender){
 
         String playerRank = groupManager.returnGroup(sender);
@@ -138,7 +132,9 @@ public class EffectRankCommand implements CommandClass {
         itemStack.setItemMeta(potionMeta);
     }
 
-    @Command(names = "reload", permission = "effectranks.admin")
+    @Command(
+            names = "reload",
+            permission = "effectranks.reload")
     public void onReloadSubCommand(@Sender Player sender){
 
         configFile.reload();
