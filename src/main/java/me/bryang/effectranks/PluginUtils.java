@@ -30,7 +30,7 @@ public class PluginUtils {
         for (int id = 0; id < 5; id++){
 
             int formatIndex = timePath.indexOf(formatChars[id]);
-            newTime += timePath.indexOf(" ", formatIndex) * timeChars[id];
+            newTime += convertNumber(" ", formatIndex) * timeChars[id];
         }
 
         return newTime;
