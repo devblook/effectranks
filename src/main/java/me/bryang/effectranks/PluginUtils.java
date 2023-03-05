@@ -23,133 +23,44 @@ public class PluginUtils {
         int months = week * 4 + (day * 2);
         int year = months * 12;
 
-        int yearIndex = timePath.indexOf("y");
+        String[] formatChars = {"y", "m", "w", "d", "h", "min", "s"};
+        int[] timeChars = {year, months, week, day, minutes, 1};
 
-        if (yearIndex != 1) {
-            newTime += timePath.indexOf(" ", yearIndex) * year;
+
+        for (int id = 0; id < 5; id++){
+
+            int formatIndex = timePath.indexOf(formatChars[id]);
+            newTime += timePath.indexOf(" ", formatIndex) * timeChars[id];
         }
-
-        int monthIndex = timePath.indexOf("m");
-
-        if (monthIndex != 1) {
-            newTime += timePath.indexOf(" ", monthIndex) * months;
-        }
-
-        int weekIndex = timePath.indexOf("w");
-
-        if (weekIndex != 1) {
-            newTime += timePath.indexOf(" ", weekIndex) * week;
-        }
-
-        int dayIndex = timePath.indexOf("d");
-
-        if (dayIndex != 1) {
-            newTime += timePath.indexOf(" ", dayIndex) * day;
-        }
-        int hourIndex = timePath.indexOf("h");
-
-        if (hourIndex != 1) {
-            newTime += timePath.indexOf(" ", hourIndex) * hour;
-        }
-
-        int minIndex = timePath.indexOf("min");
-
-        if (minIndex != 1) {
-            newTime += timePath.indexOf(" ", minIndex) * minutes;
-        }
-
-        int secondIndex = timePath.indexOf("s");
-
-        if (secondIndex != 1) {
-            newTime += timePath.indexOf(" ", secondIndex);
-        }
-
 
         return newTime;
     }
 
     public static String convertTimeToString(String timePath, ConfigurationSection section){
 
-         StringBuilder stringBuilder = new StringBuilder();
-         stringBuilder.insert(0, " ");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.insert(0, " ");
 
-        int yearIndex = timePath.indexOf("y");
+        String[] formatChars = {"y", "m", "w", "d", "h", "min", "s"};
+        String[] pathChars = {"years", "months", "weeks", "days", "hours", "minutes", "seconds"};
 
-        if (yearIndex != 1) {
+        for (int id = 0; id < 5; id++) {
 
-            int yearTime = convertNumber(timePath, yearIndex);
+            int numberIndex = timePath.indexOf(formatChars[id]);
 
-             stringBuilder
-                     .append(section.getString((yearTime == 1) ? "year" : "years"))
-                     .append(" ");
-         }
+            if (numberIndex != -1){
 
-        int monthIndex = timePath.indexOf("m");
+                String pathType = pathChars[id];
+                int formatTime = convertNumber(timePath, numberIndex);
 
-        if (monthIndex != 1) {
+                if (formatTime != -1) pathType = pathType.substring(0, pathType.length() - 1);
 
-            int monthTime = convertNumber(timePath, monthIndex);
+                stringBuilder
+                        .append(section.getString(pathType))
+                        .append(" ");
+            }
 
-            stringBuilder
-                    .append(section.getString((monthTime == 1) ? "month" : "months"))
-                    .append(" ");
         }
-
-        int weekIndex = timePath.indexOf("y");
-
-        if (weekIndex != 1) {
-
-            int weekTime = convertNumber(timePath, weekIndex);
-
-            stringBuilder
-                    .append(section.getString((weekTime == 1) ? "week" : "weeks"))
-                    .append(" ");
-        }
-
-        int daysIndex = timePath.indexOf("d");
-
-        if (daysIndex != 1) {
-
-            int dayTime = convertNumber(timePath, daysIndex);
-
-            stringBuilder
-                    .append(section.getString((dayTime == 1) ? "day" : "days"))
-                    .append(" ");
-        }
-
-        int hoursIndex = timePath.indexOf("h");
-
-        if (hoursIndex != 1) {
-
-            int hoursTime = convertNumber(timePath, hoursIndex);
-
-            stringBuilder
-                    .append(section.getString((hoursTime == 1) ? "hour" : "hours"))
-                    .append(" ");
-        }
-
-        int minuteIndex = timePath.indexOf("min");
-
-        if (minuteIndex != 1) {
-
-            int minuteTime = convertNumber(timePath, minuteIndex);
-
-            stringBuilder
-                    .append(section.getString((minuteTime == 1) ? "minute" : "minutes"))
-                    .append(" ");
-        }
-
-        int secondsIndex = timePath.indexOf("s");
-
-        if (secondsIndex != 1) {
-
-            int secondTime = convertNumber(timePath, secondsIndex);
-
-            stringBuilder
-                    .append(section.getString((secondTime == 1) ? "second" : "seconds"))
-                    .append(" ");
-        }
-
 
         return stringBuilder.toString();
     }
